@@ -1,0 +1,168 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body{
+    font-family: 'Hind', sans-serif;
+    /* rem = đơn vị tương đối, rem sẽ dựa vào font size của html để tính kích thước, spacing(padding, margin) */
+    font-size:18px;
+    /*? nếu không khai báo font-size, mặc định 1 rem = 16px */
+}
+
+/* header */
+header{
+    position: absolute;
+    top: 0;
+    left: 0;
+    /* z- index: auto của thẻ có position tạo sau > tạo trước
+    z-index có số > z: index: auto
+    z-index có số lớn đè lên z-index số nhỏ */
+    z-index: 10;
+    width: 100%;
+}
+
+
+header .navbar-brand{
+    font-size: 2rem;
+    /* base tren body: 1 rem = 18px */
+}
+
+#portfolioNav .nav-link{
+    font-size: 1rem;
+    margin: 0 .8rem;
+    color: white;
+}
+
+/* after nhu the con tren giao dien */
+#portfolioNav .nav-link::after{
+    content: "";
+    display: block;
+    /* trước hover */
+    width: 0;
+    height: 5px;
+    background-color: #35a22c;
+    transition: .5s;
+}
+
+/*! sau hover */
+#portfolioNav .nav-item:hover .nav-link::after{
+    width: 100%;
+}
+
+/* thẻ li có class active thì after của nav-link luôn xuất hiện */
+#portfolioNav .nav-item:hover .nav-link{
+    color:#35a22c;
+}
+
+/* li.active: định nghĩa selector  */
+#portfolioNav .nav-item.active .nav-link::after{
+    width:100%;
+}
+
+#portfolioNav .active .nav-link{
+    color:#35a22c;
+}
+
+
+/*! nằm dưới cùng của vùng nội dung chính header 
++ dễ đọc code
++ bị dài code*/
+/* Desktop first: max-width (màn hình lớn trước -> màn hình nhỏ */
+
+/* kích thước tối đa vùng màn hình <= 992px, code chỉ ảnh hưởng khi nó trong vùng màn hình này */ 
+@media screen and (max-width:992px){
+    /* Desktop first: Kích thước tối da vùng màn hình <=992px  (mobile ngược lại)*/
+    /* !Điểm ưu tiên của selector:
+    - Tên thẻ =1
+    - Tên tiếp: 10 mỗi cái
+    - id=100 */
+    header .navbar .navbar-toggler{
+        background: green;
+    }  
+    #portfolioNav{
+        background: white;
+    }
+    #portfolioNav .nav-link{
+        color: green;
+    }
+    #portfolioNav .nav-link::after{
+        /* !-Opacity: trong suốt nhưng vẫn chiếm diện tích trên UI (dùng được với trasition)
+            !- Display: none: ẩn hoàn toàn thẻ (cả diện tích thẻ)=> Không dùng được với transition
+            *** Transition chỉ dùng được với những con số (vd opacity hay color có thể dùng được với transition)
+            */
+        opacity: 0;/* or display: none; */
+    }
+    #portfolioNav .nav-item:hover{
+        background-color: green;
+    }
+
+    #portfolioNav .nav-item:hover .nav-link{
+        color: white;
+    }
+
+}
+
+/* Code minh hoa */
+@media screen and (max-width:576px) {
+    header .navbar .navbar-toggler{
+        background-color: hotpink;
+    }
+}
+
+
+/* CAROUSEL */
+/*! Gọi các thẻ img là con trực tiếp (cấp 1) của carousel-items */
+#carouselPortMain .carousel-item > img{
+    /* thường dùng ở main carousel */
+    height: 100vh;
+    object-fit: cover; /* bg-size: cover -> cho background*/
+}
+
+#carouselPortMain .carousel-caption img {
+    /* hình có dạng hình vuông sẵn chỉ cần set width thì nó tự động điều chỉnh */
+    width: 140px;
+    border-radius: 50%;
+}
+
+/* muốn chuyển chữ nhật => vuông => tròn  */
+
+/*! Kỹ thuật căn giữa vs position absolute cho mọi màn hình */
+#carouselPortMain .carousel-caption{
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+
+
+/* PROJECTS */
+.projects{
+    padding: 100px 0;
+}
+
+
+
+/* AWARDS */
+/* img: khi can SEO (khoi san pham) */
+/* background-image: anh trang tri ko can SEO (co the dung img nhung chi nen dung vs anh kich thuoc nho*/
+.awards{
+    padding: 70px 0;
+    background-image: url(../img/memphis_3.png);
+    /* nếu nền có size nhỏ hơn thẻ cha thì tự động lăp lại để phủ hết thẻ cha */
+    background-size: 50%;
+    background-repeat: no-repeat;
+    background-position: left bottom;
+
+}
+
+.awards__left{
+    padding: 45px;
+    background: rgba( 255, 255, 255, 0.7 );
+    border: 1px solid rgba( 255, 255, 255, 0.18 );
+    
+    backdrop-filter: blur( 4px );
+    border-radius: 10px;
+    box-shadow: 0 8px 32px 0 rgba( 0, 0, 0, 0.3 );
+}
